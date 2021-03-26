@@ -7,12 +7,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src='https://unpkg.com/react-router-dom@5.0.0/umd/react-router-dom.min.js'></script>
     <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <style type="text/css">
+      li{
+        list-style:none;
+        padding-right:1%;
+      }
+    </style>
   </head>
 
   <body style="background:aliceblue;" class="container">
     <div id="root"></div>
     <script type="text/babel">
+      const Link = ReactRouterDOM.Link;
+      const Route = ReactRouterDOM.Route;
+        <ReactRouterDOM.HashRouter>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/login">Login</Link></li>
+            <li><Link to="/register">Register</Link></li>
+          </ul>
+        </ReactRouterDOM.HashRouter>
+
       const linkData = [
         {
           title: "React - A JavaScript Library for Building User Interfaces",
@@ -34,7 +51,7 @@
         }
       ];
 
-      function Link(props) {
+      function Links(props) {
         return (
           <div className="card mb-3 p-3">
             <a href={props.url}>{props.title}</a>
@@ -46,14 +63,13 @@
         );
       }
 
-      function App() {
-        return (
-          <section>
-            <h1 className="text-center">Reactjs with CDN Link</h1>
+      const Home = () => <h1>Home</h1>
+      const Title = () => React.useState("Reactjs useState, routing SPA with CDN Link")
+      const Posts = () => <section>
 
             {linkData.map(function(link) {
               return (
-                <Link
+                <Links
                   key={link.url}
                   title={link.title}
                   url={link.url}
@@ -63,8 +79,26 @@
               );
             })}
           </section>
+
+      function App() {  
+        return (
+        <div>
+            <h1 className="text-center">
+              <Title />
+            </h1>
+           <ReactRouterDOM.HashRouter>
+          <ul className="d-flex side-by-side">
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/posts">Posts</Link></li>
+          </ul>
+
+            <Route path="/" default exact component={Home} />
+            <Route path="/posts" component={Posts} />
+          </ReactRouterDOM.HashRouter>
+         </div>
         );
       }
+
 
       ReactDOM.render(<App />, document.getElementById("root"));
     </script>
