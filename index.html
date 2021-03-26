@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Reactjs Search Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+  </head>
+
+  <body style="background:aliceblue;" class="container">
+    <div id="root"></div>
+    <script type="text/babel">
+      const linkData = [
+        {
+          title: "React - A JavaScript Library for Building User Interfaces",
+          url: "https://reactjs.org",
+          shortUrl: "reactjs.org",
+          excerpt: "React makes it painless to create interactive UIs."
+        },
+        {
+          title: "React (web framework) - Wikipedia",
+          url: "https://en.wikipedia.org/wiki/React_(web_framework)",
+          shortUrl: "en.wikipedia.org › wiki › React_(web_framework)",
+          excerpt: "React is a JavaScript library for building user interfaces."
+        },
+        {
+          title: "React (@reactjs) | Twitter",
+          url: "https://twitter.com/reactjs",
+          shortUrl: "twitter.com › reactjs",
+          excerpt: "The latest Tweets from React (@reactjs)."
+        }
+      ];
+
+      function Link(props) {
+        return (
+          <div className="card mb-3 p-3">
+            <a href={props.url}>{props.title}</a>
+            <div>
+              <h3>{props.shortUrl}</h3>
+            </div>
+            <div>{props.excerpt}</div>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <section>
+            <h1 className="text-center">Reactjs with CDN Link</h1>
+
+            {linkData.map(function(link) {
+              return (
+                <Link
+                  key={link.url}
+                  title={link.title}
+                  url={link.url}
+                  shortUrl={link.shortUrl}
+                  excerpt={link.excerpt}
+                />
+              );
+            })}
+          </section>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+
+</html>
